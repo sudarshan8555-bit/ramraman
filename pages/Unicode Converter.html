@@ -1,1 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Universal Conversion Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  
+</head>
+<body class="bg-gray-100">
+    <div id="root">
+        <div class="h-screen bg-gradient-to-br from-green-100 via-cyan-100 to-blue-200 p-4 sm:p-6 lg:p-8 font-sans flex flex-col">
+            <div class="w-full flex flex-col flex-grow">
+                <main class="flex-grow flex flex-col gap-6">
+                    
+                    <div class="flex flex-col flex-grow basis-1/3 min-h-0">
+                        <div class="flex justify-between items-center mb-2">
+                            <h2 id="text-label" class="text-lg font-bold text-gray-800">Text Input</h2>
+                            <div class="flex items-center gap-4">
+                                <div class="text-sm text-gray-600 font-medium">Chars: <span id="text-counter">0</span></div>
+                                <button id="copy-text" class="px-3 py-1 text-sm font-semibold rounded-md transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">
+                                    Copy
+                                </button>
+                            </div>
+                        </div>
+                        <textarea id="text-input" aria-labelledby="text-label" placeholder="Type or paste your text (even emojis!) here..." class="w-full h-full flex-grow p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none text-lg transition-colors"></textarea>
+                    </div>
 
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 flex-grow basis-2/3 min-h-0">
+                        <div class="flex flex-col min-h-0">
+                            <div class="flex justify-between items-center mb-2">
+                                <h2 id="binary-label" class="text-lg font-bold text-gray-800">Binary</h2>
+                                <div class="flex items-center gap-4">
+                                    <div class="text-sm text-gray-600 font-medium">Digits: <span id="binary-counter">0</span></div>
+                                    <button id="copy-binary" class="px-3 py-1 text-sm font-semibold rounded-md transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+                            <textarea id="binary-output" aria-labelledby="binary-label" class="w-full h-full flex-grow p-4 border border-gray-300 rounded-lg shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none text-lg font-mono transition-colors"></textarea>
+                        </div>
+
+                        <div class="flex flex-col min-h-0">
+                            <div class="flex justify-between items-center mb-2">
+                                <h2 id="hex-label" class="text-lg font-bold text-gray-800">Hexadecimal</h2>
+                                <div class="flex items-center gap-4">
+                                    <div class="text-sm text-gray-600 font-medium">Digits: <span id="hex-counter">0</span></div>
+                                    <button id="copy-hex" class="px-3 py-1 text-sm font-semibold rounded-md transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+                            <textarea id="hex-output" aria-labelledby="hex-label" class="w-full h-full flex-grow p-4 border border-gray-300 rounded-lg shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none text-lg font-mono transition-colors"></textarea>
+                        </div>
+
+                        <div class="flex flex-col min-h-0">
+                            <div class="flex justify-between items-center mb-2">
+                                <h2 id="decimal-label" class="text-lg font-bold text-gray-800">Decimal</h2>
+                                <div class="flex items-center gap-4">
+                                    <div class="text-sm text-gray-600 font-medium">Digits: <span id="decimal-counter">0</span></div>
+                                    <button id="copy-decimal" class="px-3 py-1 text-sm font-semibold rounded-md transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+                            <textarea id="decimal-output" aria-labelledby="decimal-label" class="w-full h-full flex-grow p-4 border border-gray-300 rounded-lg shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none text-lg font-mono transition-colors"></textarea>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DOM Elements ---
+            const elements = {
+                text: document.getElementById('text-input'),
+                binary: document.getElementById('binary-output'),
+                hex: document.getElementById('hex-output'),
+                decimal: document.getElementById('decimal-output')
+            };
+
+            const counters = {
+                text: document.getElementById('text-counter'),
+                binary: document.getElementById('binary-counter'),
+                hex: document.getElementById('hex-counter'),
+                decimal: document.getElementById('decimal-counter')
+            };
+
+            const buttons = {
+                text: document.getElementById('copy-text'),
+                binary: document.getElementById('copy-binary'),
+                hex: document.getElementById('copy-hex'),
+                decimal: document.getElementById('copy-decimal')
+            };
+
+            // --- Robust Unicode Conversion Functions ---
+            const textToBinary = (text) => [...text].map(char => char.codePointAt(0).toString(2).padStart(16, '0')).join(' ');
+            const textToHex = (text) => [...text].map(char => char.codePointAt(0).toString(16).padStart(4, '0').toUpperCase()).join(' ');
+            const textToDecimal = (text) => [...text].map(char => char.codePointAt(0)).join(' ');
+
+            const decodeData = (str, base) => {
+                if (!str.trim()) return '';
+                try {
+                    return str.trim().split(/\s+/).map(val => {
+                        const code = parseInt(val, base);
+                        if (isNaN(code)) throw new Error();
+                        return String.fromCodePoint(code);
+                    }).join('');
+                } catch (e) {
+                    return null; 
+                }
+            };
+
+            // --- Unified Update Controller ---
+            const updateFromSource = (sourceType, value) => {
+                let textVal = "";
+                let isValid = true;
+
+                // 1. Resolve to standard text
+                if (value.trim() === "") {
+                    textVal = "";
+                } else if (sourceType === 'text') {
+                    textVal = value;
+                } else if (sourceType === 'binary' && /^[01\s]*$/.test(value)) {
+                    textVal = decodeData(value, 2);
+                } else if (sourceType === 'hex' && /^[0-9a-fA-F\s]*$/.test(value)) {
+                    textVal = decodeData(value, 16);
+                } else if (sourceType === 'decimal' && /^[0-9\s]*$/.test(value)) {
+                    textVal = decodeData(value, 10);
+                } else {
+                    textVal = null; 
+                }
+
+                if (textVal === null) isValid = false;
+
+                // 2. Handle UI Error States
+                Object.keys(elements).forEach(key => {
+                    const el = elements[key];
+                    if (!isValid && key === sourceType) {
+                        el.classList.add('border-red-500', 'ring-2', 'ring-red-500');
+                        el.classList.remove('border-gray-300', 'focus:ring-blue-500');
+                    } else {
+                        el.classList.remove('border-red-500', 'ring-2', 'ring-red-500');
+                        el.classList.add('border-gray-300', 'focus:ring-blue-500');
+                    }
+                });
+
+                // 3. Update the other boxes if valid
+                if (isValid) {
+                    if (sourceType !== 'text') elements.text.value = textVal;
+                    if (sourceType !== 'binary') elements.binary.value = textToBinary(textVal);
+                    if (sourceType !== 'hex') elements.hex.value = textToHex(textVal);
+                    if (sourceType !== 'decimal') elements.decimal.value = textToDecimal(textVal);
+                }
+
+                // 4. Update Counters
+                counters.text.textContent = elements.text.value.length;
+                counters.binary.textContent = elements.binary.value.replace(/\s/g, '').length;
+                counters.hex.textContent = elements.hex.value.replace(/\s/g, '').length;
+                counters.decimal.textContent = elements.decimal.value.replace(/\s/g, '').length;
+            };
+
+            // --- DEBOUNCE FUNCTION (नया कोड यहाँ है) ---
+            const debounce = (func, delay) => {
+                let timeoutId;
+                return (...args) => {
+                    clearTimeout(timeoutId);
+                    timeoutId = setTimeout(() => {
+                        func.apply(null, args);
+                    }, delay);
+                };
+            };
+
+            // updateFromSource को 300ms (0.3 सेकंड) के लिए Debounce कर दिया
+            const debouncedUpdate = debounce(updateFromSource, 500);
+
+            // --- Event Listeners (अब debouncedUpdate का इस्तेमाल कर रहे हैं) ---
+            elements.text.addEventListener('input', (e) => debouncedUpdate('text', e.target.value));
+            elements.binary.addEventListener('input', (e) => debouncedUpdate('binary', e.target.value));
+            elements.hex.addEventListener('input', (e) => debouncedUpdate('hex', e.target.value));
+            elements.decimal.addEventListener('input', (e) => debouncedUpdate('decimal', e.target.value));
+
+
+            // --- Copy Functionality ---
+            const handleCopy = (value, button) => {
+                if (!value) return;
+                navigator.clipboard.writeText(value).then(() => {
+                    const originalText = button.textContent;
+                    button.textContent = 'Copied!';
+                    button.classList.remove('bg-gray-200', 'hover:bg-gray-300', 'text-gray-700');
+                    button.classList.add('bg-blue-500', 'text-white');
+                    
+                    setTimeout(() => {
+                        button.textContent = 'Copy';
+                        button.classList.remove('bg-blue-500', 'text-white');
+                        button.classList.add('bg-gray-200', 'hover:bg-gray-300', 'text-gray-700');
+                    }, 2000);
+                });
+            };
+
+            buttons.text.addEventListener('click', () => handleCopy(elements.text.value, buttons.text));
+            buttons.binary.addEventListener('click', () => handleCopy(elements.binary.value, buttons.binary));
+            buttons.hex.addEventListener('click', () => handleCopy(elements.hex.value, buttons.hex));
+            buttons.decimal.addEventListener('click', () => handleCopy(elements.decimal.value, buttons.decimal));
+        });
+    </script>
+</body>
+</html>
