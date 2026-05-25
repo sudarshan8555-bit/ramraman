@@ -5,12 +5,12 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: #f4f7fb;
-      min-height: 100vh;
-      padding: 00px;
-      color: #1e293b;
-    }
+  font-family: 'Inter', sans-serif;
+  background: #f4f7fb;
+  min-height: 100vh;
+  color: #1e293b;
+  margin: 0;
+}
 
     .container {
       width: 100%;
