@@ -193,54 +193,65 @@
    HEADER STYLES
 ===================================== */
 
+/* --- HEADER & NAVIGATION --- */
+
 header {
   background: linear-gradient(135deg, #8b5cf6, #ee9977);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
 .nav-container {
-  max-width: 1400px;
-  margin: auto;
-  padding: 1.2rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.25rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .logo {
-  color: white;
   font-size: 1.5rem;
   font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.5px;
   text-decoration: none;
 }
 
 nav ul {
   display: flex;
-  gap: 2rem;
-  list-style: none;
+  gap: 2.5rem;
   align-items: center;
+  list-style: none;
 }
 
 nav a {
-  color: rgba(255,255,255,0.9);
-  text-decoration: none;
   font-weight: 600;
-  transition: 0.3s;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 nav a:hover {
-  color: white;
+  color: #ffffff;
 }
 
 .btn-signup {
-  background: white;
+  background: #ffffff;
   color: #8b5cf6 !important;
-  padding: 10px 18px;
+  padding: 0.75rem 1.5rem;
   border-radius: 50px;
   font-weight: 700;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.btn-signup:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  background: #f8fafc;
 }
 
 /* =====================================
@@ -253,7 +264,7 @@ body {
 }
 
 .main-layout {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 40px auto;
   padding: 0 20px;
   display: flex;
@@ -355,7 +366,7 @@ footer {
 }
 
 .footer-bottom {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: auto;
   display: flex;
   justify-content: space-between;
