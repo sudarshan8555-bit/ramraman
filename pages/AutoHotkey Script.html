@@ -20,9 +20,6 @@
       font-family: 'Inter', sans-serif;
       background: #f4f7fb;
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       padding: 40px 20px;
       color: #1e293b;
     }
@@ -202,67 +199,439 @@
       }
 
     }
+    
+    
+    /* =====================================
+   HEADER STYLES
+===================================== */
+
+header {
+  background: linear-gradient(135deg, #8b5cf6, #ee9977);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: auto;
+  padding: 1.2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+nav ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  align-items: center;
+}
+
+nav a {
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: white;
+}
+
+.btn-signup {
+  background: white;
+  color: #8b5cf6 !important;
+  padding: 10px 18px;
+  border-radius: 50px;
+  font-weight: 700;
+}
+
+/* =====================================
+   MAIN LAYOUT
+===================================== */
+
+body {
+  display: block;
+  background: #f4f7fb;
+}
+
+.main-layout {
+  max-width: 1400px;
+  margin: 40px auto;
+  padding: 0 20px;
+  display: flex;
+  gap: 35px;
+  align-items: flex-start;
+}
+
+/* =====================================
+   MAIN CONTAINER
+===================================== */
+
+.container {
+  flex: 2.2;
+}
+
+/* =====================================
+   SIDEBAR
+===================================== */
+
+.sidebar {
+  flex: 1;
+}
+
+.widget {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.widget h3 {
+  font-size: 1.1rem;
+  margin-bottom: 18px;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.widget h3::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: #8b5cf6;
+}
+
+.search-box {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #dbe4f0;
+  outline: none;
+  font-size: 14px;
+}
+
+.search-box:focus {
+  border-color: #8b5cf6;
+}
+
+.widget-list {
+  list-style: none;
+}
+
+.widget-list li {
+  padding: 12px 0;
+  border-bottom: 1px dashed #dbe4f0;
+}
+
+.widget-list li:last-child {
+  border-bottom: none;
+}
+
+.widget-list a {
+  display: flex;
+  justify-content: space-between;
+  color: #475569;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.widget-list a:hover {
+  color: #8b5cf6;
+  padding-left: 5px;
+}
+
+/* =====================================
+   FOOTER
+===================================== */
+
+footer {
+  background: #0f172a;
+  color: #94a3b8;
+  padding: 25px 20px;
+  margin-top: 50px;
+}
+
+.footer-bottom {
+  max-width: 1400px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-bottom a {
+  color: #94a3b8;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  color: white;
+}
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media(max-width: 1000px) {
+
+  .main-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+}
+
+@media(max-width: 768px) {
+
+  nav ul {
+    display: none;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+}
   </style>
 </head>
 
 <body>
 
-  <div class="container">
+  <!-- =========================
+        HEADER
+  ========================== -->
 
-    <div class="header">
-      <h1>⚡ AutoHotkey Script</h1>
-      <p>Professional & Easy AutoHotkey Script for Cropping Multiple Images in FastStone Image Viewer</p>
+  <header>
+    <div class="nav-container">
+
+      <a href="#" class="logo">Ram Kargwal</a>
+
+      <nav>
+        <ul>
+          <li><a href="#">Game</a></li>
+          <li><a href="#">Utility</a></li>
+          <li><a href="#">Project</a></li>
+          <li><a href="#">Docs</a></li>
+          <li><a style="color:#ffffff;font-weight:800;" href="#">AHK Code</a></li>
+          <li><a href="#" class="btn-signup">About Me</a></li>
+        </ul>
+      </nav>
+
     </div>
+  </header>
 
-    <div class="content">
+  <!-- =========================
+        MAIN CONTAINER
+  ========================== -->
 
-      <div class="toolbar">
+  <div class="main-layout">
 
-        <div class="language">
-          AutoHotkey v2
+    <!-- =========================
+          LEFT SIDE CONTENT
+    ========================== -->
+
+    <div class="container">
+
+      <div class="header">
+        <h1>⚡ AutoHotkey Script</h1>
+        <p>
+          Professional & Easy AutoHotkey Script for Cropping Multiple Images
+          in FastStone Image Viewer
+        </p>
+      </div>
+
+      <div class="content">
+
+        <div class="toolbar">
+
+          <div class="language">
+            AutoHotkey v2
+          </div>
+
+          <div class="buttons">
+
+            <button class="copy-btn" onclick="copyCode()">
+              📋 Copy Code
+            </button>
+
+            <button class="download-btn" onclick="downloadAHK()">
+              ⬇ Download .AHK
+            </button>
+
+          </div>
+
         </div>
 
-        <div class="buttons">
+        <div class="code-container">
 
-          <button class="copy-btn" onclick="copyCode()">
-            📋 Copy Code
-          </button>
+          <div class="code-header">
 
-          <button class="download-btn" onclick="downloadAHK()">
-            ⬇ Download .AHK
-          </button>
+            <div class="file-name">
+              Loading...
+            </div>
+
+            <div class="dots">
+              <div class="dot red"></div>
+              <div class="dot yellow"></div>
+              <div class="dot green"></div>
+            </div>
+
+          </div>
+
+          <pre id="code"></pre>
 
         </div>
 
       </div>
 
-      <div class="code-container">
-
-        <div class="code-header">
-
-          <div class="file-name">
-            Loading...
-          </div>
-
-          <div class="dots">
-            <div class="dot red"></div>
-            <div class="dot yellow"></div>
-            <div class="dot green"></div>
-          </div>
-
-        </div>
-
-        <pre id="code"></pre>
-
+      <div class="footer">
+        © 2026 Ram Kargwal. All rights reserved.
       </div>
 
     </div>
 
-    <div class="footer">
-      © 2026 Ram Kargwal. All rights reserved.
-    </div>
+    <!-- =========================
+          RIGHT SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar">
+
+      <div class="widget">
+        <input type="text" class="search-box" placeholder="Search scripts...">
+      </div>
+
+      <div class="widget">
+        <h3>Useful Tools</h3>
+
+        <ul class="widget-list">
+          <li>
+            <a href="#">
+              Unicode Converter
+              <span>🌐</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              Live HTML Editor
+              <span>💻</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              QR Generator
+              <span>📱</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="widget">
+
+        <h3>AHK Scripts</h3>
+
+        <ul class="widget-list">
+
+          <li>
+            <a href="#">
+              FastStone Crop
+              <span>🌄</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              Auto Save Tool
+              <span>💾</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              Image Renamer
+              <span>🖼️</span>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+      <div class="widget">
+
+        <h3>Categories</h3>
+
+        <ul class="widget-list">
+
+          <li>
+            <a href="#">
+              Automation
+              <span>82</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              Productivity
+              <span>17</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              Windows Tools
+              <span>45</span>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
 
   </div>
+
+  <!-- =========================
+        FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div class="footer-bottom">
+
+      <p>&copy; 2026 Ram Kargwal. All rights reserved.</p>
+
+      <div style="display:flex; gap:1rem;">
+        <a href="#">Twitter</a>
+        <a href="#">GitHub</a>
+        <a href="#">LinkedIn</a>
+      </div>
+
+    </div>
+
+  </footer>
 
   <script>
 
@@ -366,6 +735,7 @@ F2::
 
   </script>
 
+  
 </body>
 
 </html>
