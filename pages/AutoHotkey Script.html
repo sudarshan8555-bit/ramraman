@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>AutoHotkey Script Viewer</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f4f7fb;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      color: #1e293b;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1050px;
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.04);
+      border: 1px solid #e2e8f0;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      padding: 35px;
+      color: white;
+    }
+
+    .header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      opacity: 0.95;
+      font-size: 1rem;
+    }
+
+    .content {
+      padding: 35px;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .language {
+      background: #eff6ff;
+      color: #2563eb;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      border: 1px solid #bfdbfe;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      padding: 13px 22px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      transition: 0.25s ease;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .copy-btn {
+      background: #f1f5f9;
+      color: #0f172a;
+      border: 1px solid #cbd5e1;
+    }
+
+    .copy-btn:hover {
+      background: #e2e8f0;
+      transform: translateY(-2px);
+    }
+
+    .download-btn {
+      background: #2563eb;
+      color: white;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+    }
+
+    .download-btn:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+    }
+
+    .code-container {
+      background: #f8fafc;
+      border: 1px solid #dbe4f0;
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .code-header {
+      background: #eef2f7;
+      padding: 14px 20px;
+      border-bottom: 1px solid #dbe4f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .file-name {
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .red {
+      background: #ef4444;
+    }
+
+    .yellow {
+      background: #f59e0b;
+    }
+
+    .green {
+      background: #22c55e;
+    }
+
+    pre {
+      margin: 0;
+      padding: 28px;
+      overflow: auto;
+      font-size: 15px;
+      line-height: 1.8;
+      font-family: Consolas, Monaco, monospace;
+      color: #0f172a;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 22px;
+      border-top: 1px solid #e2e8f0;
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    @media(max-width:768px) {
+
+      .header h1 {
+        font-size: 1.8rem;
+      }
+
+      pre {
+        font-size: 13px;
+        padding: 18px;
+      }
+
+      button {
+        width: 100%;
+      }
+
+      .buttons {
+        width: 100%;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="header">
+      <h1>⚡ AutoHotkey Script</h1>
+      <p>Professional & Easy AutoHotkey Script for Cropping Multiple Images in FastStone Image Viewer</p>
+    </div>
+
+    <div class="content">
+
+      <div class="toolbar">
+
+        <div class="language">
+          AutoHotkey v2
+        </div>
+
+        <div class="buttons">
+
+          <button class="copy-btn" onclick="copyCode()">
+            📋 Copy Code
+          </button>
+
+          <button class="download-btn" onclick="downloadAHK()">
+            ⬇ Download .AHK
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="code-container">
+
+        <div class="code-header">
+
+          <div class="file-name">
+            Loading...
+          </div>
+
+          <div class="dots">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+          </div>
+
+        </div>
+
+        <pre id="code"></pre>
+
+      </div>
+
+    </div>
+
+    <div class="footer">
+      © 2026 Ram Kargwal. All rights reserved.
+    </div>
+
+  </div>
+
+  <script>
+
+    // =====================================================
+    //              EDIT ONLY THIS SECTION
+    // =====================================================
+
+    // File Name
+    const fileName = "FastStoneCropScript.ahk";
+
+    // Paste Your AHK Code Below
+    const rawAHKCode = `; AutoHotkey v2 script
+
+#Requires AutoHotkey v2.0
+
+; Hotkey: Press F2 to run the sequence
+
+F2::
+{
+    Send("{Enter}")
+    Sleep(300)
+
+    Send("^r")
+    Sleep(300)
+
+    Send("300")
+    Sleep(300)
+
+    Send("{Enter}")
+    Sleep(300)
+
+    Send("^s")
+    Sleep(300)
+
+    Send("{Enter}")
+    Sleep(300)
+
+    Send("{Enter}")
+    Sleep(300)
+
+    Send("{Right}")
+    Sleep(300)
+
+    Send("x")
+}
+`;
+
+    // =====================================================
+    //          DO NOT EDIT BELOW THIS LINE
+    // =====================================================
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+      // Show file name
+      document.querySelector(".file-name").textContent = fileName;
+
+      // Escape HTML safely
+      const escapedCode = rawAHKCode
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
+      // Show code
+      document.getElementById("code").innerHTML = escapedCode;
+
+    });
+
+    // Copy Code
+    function copyCode() {
+
+      navigator.clipboard.writeText(rawAHKCode)
+        .then(() => {
+          alert("AHK Code Copied Successfully!");
+        });
+
+    }
+
+    // Download AHK File
+    function downloadAHK() {
+
+      const blob = new Blob([rawAHKCode], {
+        type: "text/plain"
+      });
+
+      const link = document.createElement("a");
+
+      link.href = URL.createObjectURL(blob);
+
+      // Download file name
+      link.download = fileName;
+
+      document.body.appendChild(link);
+
+      link.click();
+
+      document.body.removeChild(link);
+
+      URL.revokeObjectURL(link.href);
+
+    }
+
+  </script>
+
+</body>
+
+</html>
